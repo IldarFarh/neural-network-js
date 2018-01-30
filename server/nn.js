@@ -1,3 +1,5 @@
+'use strict'
+
 function sigmoid(x) {
   return 1/(1 + Math.exp(-x))
 }
@@ -15,7 +17,7 @@ function dtanh(x) {
 }
 
 function ReLU(x) {
-  return max(0.01,x)
+  return Math.max(0.01,x)
 }
 
 function dReLU(x) {
@@ -24,28 +26,31 @@ function dReLU(x) {
 }
 
 function mutate(x) {
-  if (Math.random() < 0.01) return x + randomGaussian()*0.5
+  if (Math.random() < 0.01) return x + Math.random()*0.5
   else return x
 }
 
+// const Matrix = require('./matrix.js')
+import Matrix from './matrix.js'
+
 class NeuralNetwork {
-  constructor(input_nodes, hidden_nodes, second_layer, output_nodes, learning_rate) {
+  constructor(input_nodes, hidden_nodes, output_nodes, learning_rate) {
     this.input_nodes = input_nodes
     this.hidden_nodes = hidden_nodes
-    this.second_layer = second_layer
+    this.second_layer = hidden_nodes
     this.output_nodes = output_nodes
 
     this.weight_ih = new Matrix(input_nodes + 1, hidden_nodes)
     this.weight_ih.randomize()
-    this.weight_hs = new Matrix(hidden_nodes +1, second_layer)
+    this.weight_hs = new Matrix(hidden_nodes +1, hidden_nodes)
     this.weight_hs.randomize()
-    this.weight_so = new Matrix(second_layer +1, output_nodes)
+    this.weight_so = new Matrix(hidden_nodes +1, output_nodes)
     this.weight_so.randomize()
 
     this.lr = learning_rate || 0.01
 
-    this.activation = sigmoid
-    this.derivative = dsigmoid
+    this.activation = ReLU
+    this.derivative = dReLU
   }
 
   mutate() {
@@ -130,3 +135,6 @@ class NeuralNetwork {
     })
   }
 }
+
+// module.exports = NeuralNetwork
+export {NeuralNetwork}

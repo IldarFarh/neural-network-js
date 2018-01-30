@@ -1,3 +1,5 @@
+'use strict'
+
 class Matrix {
   constructor(rows, cols) {
     this.rows = rows
@@ -56,7 +58,7 @@ class Matrix {
   randomize() {
     this.data.forEach((row,i,array) => {
       row.forEach((el,j) => {
-        array[i][j] = randomGaussian()
+        array[i][j] = Math.random()*2-1
       })
     })
   }
@@ -156,3 +158,6 @@ class Matrix {
     console.table(this.data)
   }
 }
+
+// module.exports = Matrix
+export default Matrix
