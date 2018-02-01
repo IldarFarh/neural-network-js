@@ -36,9 +36,6 @@ import Matrix from './matrix.js'
 class NeuralNetwork {
   constructor(input_nodes, hidden_nodes, output_nodes, learning_rate) {
     this.input_nodes = input_nodes
-    this.hidden_nodes = hidden_nodes
-    this.second_layer = hidden_nodes
-    this.output_nodes = output_nodes
 
     this.weight_ih = new Matrix(input_nodes + 1, hidden_nodes)
     this.weight_ih.randomize()
@@ -59,7 +56,8 @@ class NeuralNetwork {
     this.weight_ih = this.weight_ih.map(mutate)
   }
 
-  feedforward(input_array) {
+  feedforward(input_arr) {
+    let input_array = input_arr
     if (input_array.length != this.input_nodes) {
       console.log('Inputs are incorrect');
       return undefined
@@ -84,7 +82,8 @@ class NeuralNetwork {
   }
 
   train(inputs, answer) {
-    inputs.forEach((input_array,j) => {
+    inputs.forEach((input_arr,j) => {
+      let input_array = input_arr
       input_array.push(1)
       let input = Matrix.fromArray(input_array)
       let target = Matrix.fromArray(answer[j])

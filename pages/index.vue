@@ -1,6 +1,9 @@
 <template>
   <section class="container">
     <neural></neural>
+    <nuxt-link class="button" to="/flappygame">
+      Flappy bird game
+    </nuxt-link>
   </section>
 </template>
 

@@ -4,7 +4,7 @@
     <ul>
       <li v-for="elem in msg">{{ elem }}</li>
     </ul>
-    <button @click="train">Train it</button>
+    <button class="button" @click="train">Train it</button>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
     train() {
       let inputs = [[1,1],[1,0],[0,1],[0,0]]
       let answer = [[0],[1],[1],[0]]
-      for (var i = 0; i < 100; i++) {
+      for (var i = 0; i < 50; i++) {
         inputs = [[1,1],[1,0],[0,1],[0,0]]
         answer = [[0],[1],[1],[0]]
         this.network.train(inputs,answer)
